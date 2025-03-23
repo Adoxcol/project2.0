@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 import {hashPassword, comparePassword, generateToken} from '../utils/authUtils';
-import {createUser, findUserByEmail} from '../services/userRepositories';
+import {createUser, findUserByEmail} from '../repositories/authRepository';
 
 export const register = async (req: Request, res: Response) => {
     try{
@@ -12,3 +12,20 @@ export const register = async (req: Request, res: Response) => {
       console.error(error);
       res.status(500).json({message: 'Internal server error'});
     }
+  };
+
+
+
+    export const login = async (req: Request, res: Response) => {
+      try {
+        const { email, password } = req.body;
+        const user = await findUserByEmail(email);
+        if (!user || !(await comparePassword(password, user.password))) {
+          return res.status(401).json({ error: 'Invalid credentials' });
+        }
+        const token = generateToken(user.id);
+        res.status(200).json({ message: 'Login successful', token });
+      } catch (error) {
+        res.status(500).json({ error: 'Login failed' });
+      }
+    };
