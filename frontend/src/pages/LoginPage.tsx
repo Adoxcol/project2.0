@@ -11,8 +11,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await login(email, password);
-      localStorage.setItem('token', response.token); // Store token in localStorage
-      navigate('/profile'); // Redirect to profile page after login
+      localStorage.setItem('token', response.token); 
+      navigate('/profile'); 
     } catch (error) {
       console.error('Login failed:', error);
     }
