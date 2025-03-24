@@ -14,3 +14,19 @@ export const register = async (email: string, password: string) => {
   return response.data;
 };
 
+export const getProfile = async (token: string) => {
+  const response = await api.get('/api/profile', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+};
+
+export const getPosts = async () => {
+  const response = await api.get('/api/posts');
+  return response.data;
+};
+
+export const getCategories = async () => {
+  const response = await api.get('/api/categories');
+  return response.data;
+};
