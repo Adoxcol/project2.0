@@ -75,38 +75,36 @@ button:focus-visible {
 
 
 .navbar {
-  background-color: #333;
+  background-color: #333; 
   padding: 1rem;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  z-index: 1000; 
 }
 
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
+  list-style: none; 
+  display: flex; 
+  justify-content: center; 
+  gap: 1rem; 
   margin: 0;
   padding: 0;
 }
 
 .nav-links li {
-  display: inline;
+  display: inline; 
 }
 
 .nav-links a {
-  text-decoration: none;
+  text-decoration: none; 
   color: white;
-  font-weight: bold;
+  font-weight: bold; 
+  padding: 0.5rem 1rem; 
+  border-radius: 5px; 
 }
 
-.back-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.back-button:hover {
-  background-color: #0056b3;
+.nav-links a:hover {
+  background-color: #555; 
 }
