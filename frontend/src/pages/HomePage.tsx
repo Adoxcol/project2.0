@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BackButton from '../components/BackButton';
-import Navbar from '@/components/NavBar';
+import Navbar from '../components/NavBar';
 
 const HomePage = () => {
   return (
