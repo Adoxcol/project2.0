@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "emitDeclarationOnly": true, 
+    "composite": true, 
+
+    /* Paths */
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* Incremental Compilation */
+    "incremental": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "include": ["vite.config.ts", "src/**/*.ts"]
+}
