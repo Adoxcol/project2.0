@@ -1,24 +1,32 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type AuthContextType = {
+interface AuthContextType {
   token: string | null;
   login: (newToken: string) => void;
   logout: () => void;
-};
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
   const login = (newToken: string) => {
-    setToken(newToken);
     localStorage.setItem('token', newToken);
+    setToken(newToken);
   };
 
   const logout = () => {
-    setToken(null);
     localStorage.removeItem('token');
+    setToken(null);
   };
 
   return (
@@ -26,10 +34,4 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within an AuthProvider');
-  return context;
 };
