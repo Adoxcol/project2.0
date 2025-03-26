@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { hashPassword, comparePassword, generateToken } from '../utils/authUtils';
 import { createUser, findUserByEmail } from '../repositories/authRepository';
 
@@ -14,17 +14,19 @@ export const register = async (req: Request, res: Response) => {
     }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { email, password } = req.body;
-        const user = await findUserByEmail(email);
-        if (!user || !(await comparePassword(password, user.password))) {
-            return res.status(401).json({ error: 'Invalid credentials' });
-        }
-        const token = generateToken(user.id);
-        res.status(200).json({ message: 'Login successful', token });
+      const { email, password } = req.body;
+      const user = await findUserByEmail(email);
+  
+      if (!user || !(await comparePassword(password, user.password))) {
+        res.status(401).json({ error: 'Invalid credentials' });
+        return; 
+      }
+  
+      const token = generateToken(user.id);
+      res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Login failed' });
+      next(error); 
     }
-};
+  };
